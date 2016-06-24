@@ -9,13 +9,11 @@ const BenchIndex = React.createClass({
   },
 
   componentDidMount() {
-    console.log("cdm");
     this.token = BenchStore.addListener(this._onChange);
     BenchActions.fetchAllBenches();
   },
 
   _onChange(){
-    console.log("onchange");
     this.setState({ benches: BenchStore.all() });
   },
 
