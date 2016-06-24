@@ -1,5 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+const BenchStore = require('../stores/bench_store');
+const BenchActions = require('../actions/bench_actions');
 
 const BenchMap = React.createClass({
   componentDidMount(){
@@ -9,6 +11,21 @@ const BenchMap = React.createClass({
       zoom: 13
     };
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
+
+    this.token = BenchStore.addListener(this._onChange);
+    this.map.addListener('idle', () => BenchActions.fetchAllBenches());
+  },
+
+  _onChange(){
+    BenchStore.all().forEach((bench) => {
+      let myLatLng = {lat: bench.lat, lng: bench.lng};
+
+      let marker = new google.maps.Marker({
+        position: myLatLng,
+        map: this.map,
+        title: bench.description
+      });
+    })
   },
 
   render(){

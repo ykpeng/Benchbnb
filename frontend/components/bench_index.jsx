@@ -10,7 +10,6 @@ const BenchIndex = React.createClass({
 
   componentDidMount() {
     this.token = BenchStore.addListener(this._onChange);
-    BenchActions.fetchAllBenches();
   },
 
   _onChange(){
