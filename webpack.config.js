@@ -1,6 +1,6 @@
 module.exports = {
   context: __dirname,
-  entry: "./frontend/benchbnb.jsx",
+  entry: "./frontend/bench_bnb.jsx",
   output: {
     path: "./app/assets/javascripts",
     filename: "bundle.js"
