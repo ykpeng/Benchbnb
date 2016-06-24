@@ -1,5 +1,9 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+const BenchStore = require('./stores/bench_store');
+const BenchApiUtil = require('./util/bench_api_util');
+const BenchActions = require('./actions/bench_actions');
+const BenchConstants = require('./constants/bench_constants');
 
 var MyComponent = React.createClass({
   render() {
@@ -12,14 +16,3 @@ var MyComponent = React.createClass({
 document.addEventListener("DOMContentLoaded", () => {
   ReactDOM.render(<MyComponent />, document.getElementById('content'));
 });
-
-
-// $.ajax({
-//   url: "api/benches",
-//   type: "POST",
-//   data: {bench:{description: "puppy bench", lat: 33.33333, lng: -122.22222}},
-//   dataType: "json",
-//   success: function(response){
-//     console.log(response);
-//   }
-// })
