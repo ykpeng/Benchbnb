@@ -9,8 +9,8 @@ const BenchActions = {
       benches: benches
     })
   },
-  fetchAllBenches: function(){
-    BenchApiUtil.fetchAllBenches(this.receiveAllBenches);
+  fetchAllBenches: function(bounds){
+    BenchApiUtil.fetchAllBenches(bounds, this.receiveAllBenches);
   }
 }
 
