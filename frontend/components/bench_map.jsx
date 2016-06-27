@@ -2,6 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const BenchStore = require('../stores/bench_store');
 const BenchActions = require('../actions/bench_actions');
+const hashHistory = require('react-router').hashHistory;
 
 const BenchMap = React.createClass({
   componentDidMount(){
@@ -14,7 +15,18 @@ const BenchMap = React.createClass({
     this.markers = [];
 
     this.token = BenchStore.addListener(this._onChange);
+    this.map.addListener('click', this._handleClick);
     this.map.addListener('idle', this._onMapIdle);
+  },
+
+  _handleClick(coords){
+      console.log(coords);
+      const lat = coords.latLng.lat();
+      const lng = coords.latLng.lng();
+      hashHistory.push({
+      pathname: "benches/new",
+      query: {lat: lat, lng: lng}
+    });
   },
 
   _onMapIdle(){

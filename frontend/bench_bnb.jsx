@@ -8,11 +8,15 @@ const IndexRoute = ReactRouter.IndexRoute;
 const hashHistory = ReactRouter.hashHistory;
 
 // const BenchStore = require('./stores/bench_store');
-// const BenchApiUtil = require('./util/bench_api_util');
+const BenchApiUtil = require('./util/bench_api_util');
 // const BenchActions = require('./actions/bench_actions');
 // const BenchConstants = require('./constants/bench_constants');
 // const BenchIndex = require('./components/bench_index');
 const Search = require('./components/search');
+const BenchForm = require('./components/bench_form');
+
+// window.BenchApiUtil = BenchApiUtil;
+// window.BenchStore = BenchStore;
 
 const App = React.createClass({
   render(){
@@ -25,14 +29,15 @@ const App = React.createClass({
   }
 });
 
-const Router = (
+const router = (
   <Router history={hashHistory}>
     <Route path='/' component={App}>
       <IndexRoute component={Search}/>
+      <Route path="/benches/new" component={BenchForm}/>
     </Route>
   </Router>
 )
 
 document.addEventListener("DOMContentLoaded", () => {
-  ReactDOM.render(Router, document.getElementById('content'));
+  ReactDOM.render(router, document.getElementById('content'));
 });
