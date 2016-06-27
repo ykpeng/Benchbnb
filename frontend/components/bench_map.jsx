@@ -26,9 +26,9 @@ const BenchMap = React.createClass({
   },
 
   _addMarkers(){
-    this.currentBenchIds = this.markers.map((marker)=>marker.benchId);
+    const currentBenchIds = this.markers.map((marker)=>marker.benchId);
     BenchStore.all().forEach((bench) => {
-      if (!this.currentBenchIds.includes(bench.id)){
+      if (!currentBenchIds.includes(bench.id)){
         let myLatLng = {lat: bench.lat, lng: bench.lng};
         let marker = new google.maps.Marker({
           position: myLatLng,
@@ -39,14 +39,16 @@ const BenchMap = React.createClass({
         this.markers.push(marker);
       }
     })
-    this.currentBenchIds = this.markers.map((marker)=>marker.benchId);
+    // this.currentBenchIds = this.markers.map((marker)=>marker.benchId);
   },
 
   _removeMarkers(){
+    const currentBenchIds = this.markers.map((marker)=>marker.benchId);
+
     const idsToRemove = [];
     const storeBenchIds = BenchStore.all().map( (bench) => bench.id );
 
-    this.currentBenchIds.forEach( (id) => {
+    currentBenchIds.forEach( (id) => {
       if (!storeBenchIds.includes(id)){
         idsToRemove.push(id);
       }
@@ -64,7 +66,6 @@ const BenchMap = React.createClass({
       this.markers[idx].setMap(null);
       this.markers.splice(idx, 1)
     });
-    this.currentBenchIds = this.markers.map((marker) => marker.benchId);
   },
 
   _onChange(){
